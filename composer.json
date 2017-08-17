@@ -1,9 +1,5 @@
 {
     "name": "vanquyet/yii2-image",
-    "require": {
-        "yiisoft/yii2-app-advanced": "2.0.6",
-        "yiisoft/yii2-imagine": "*"
-    },
     "license": "MIT",
     "authors": [
         {
