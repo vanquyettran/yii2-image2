@@ -57,7 +57,7 @@ class m170730_002928_create_image_table extends Migration
             'creator_id',
             'user',
             'id',
-            'CASCADE'
+            'RESTRICT'
         );
 
         // creates index for column `updater_id`
@@ -74,7 +74,7 @@ class m170730_002928_create_image_table extends Migration
             'updater_id',
             'user',
             'id',
-            'CASCADE'
+            'RESTRICT'
         );
     }
 
