@@ -254,7 +254,7 @@ class Image extends BaseImage
                                 }
                             }
                         }
-                        $this->resize_labels = json_encode($resize_labels);
+                        $this->resize_labels = json_encode((object) $resize_labels);
 
                         if ($this->save()) {
                             return true;
@@ -378,7 +378,7 @@ class Image extends BaseImage
                                     }
                                 }
                             }
-                            $this->resize_labels = json_encode($resize_labels);
+                            $this->resize_labels = json_encode((object) $resize_labels);
                         }
 
                         $dir = $this->getDirectory();

@@ -17,8 +17,8 @@ class ImageSearch extends Image
     public function rules()
     {
         return [
-            [['id', 'creator_id', 'updater_id', 'active', 'status', 'create_time', 'update_time', 'width', 'height', 'quality'], 'integer'],
-            [['file_basename', 'path', 'name', 'file_extension', 'mime_type', 'description', 'resize_labels', 'encode_data', 'aspect_ratio'], 'safe'],
+            [['id', 'creator_id', 'updater_id', 'created_time', 'updated_time', 'width', 'height', 'quality'], 'integer'],
+            [['file_basename', 'path', 'name', 'file_extension', 'mime_type', 'resize_labels', 'aspect_ratio'], 'safe'],
         ];
     }
 
@@ -66,10 +66,8 @@ class ImageSearch extends Image
             'id' => $this->id,
             'creator_id' => $this->creator_id,
             'updater_id' => $this->updater_id,
-            'active' => $this->active,
-            'status' => $this->status,
-            'create_time' => $this->create_time,
-            'update_time' => $this->update_time,
+            'created_time' => $this->created_time,
+            'updated_time' => $this->updated_time,
             'quality' => $this->quality,
             'width' => $this->width,
             'height' => $this->height,
@@ -80,9 +78,7 @@ class ImageSearch extends Image
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'file_extension', $this->file_extension])
             ->andFilterWhere(['like', 'mime_type', $this->mime_type])
-            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'resize_labels', $this->resize_labels])
-            ->andFilterWhere(['like', 'encode_data', $this->encode_data])
             ->andFilterWhere(['like', 'aspect_ratio', $this->aspect_ratio]);
 
         return $dataProvider;

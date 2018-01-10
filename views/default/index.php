@@ -23,41 +23,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
-
-//            'id',
+            'id',
             [
-                'attribute' => 'IMG',
+                'attribute' => '',
                 'format' => 'raw',
                 'value' => function (Image $model) {
-                    return $model->img('30x30');
+                    return $model->img('100x100');
                 }
             ],
-//            'creator_id',
-//            'updater_id',
             'name',
-//            'path',
-            // 'file_name',
-             'file_basename',
-            // 'file_extension',
-            // 'resize_labels',
-            // 'string_data',
-//             'mime_type',
-//            [
-//                'attribute' => 'active',
-//                'format' => 'raw',
-//                'value' => function ($model) {
-//                    if ($model->active) {
-//                        return '<span class="label label-success">active</span>';
-//                    }
-//                    return '<span class="label label-default">inactive</span>';
-//                }
-//            ],
-            // 'status',
-             'aspect_ratio',
-//             'create_time:datetime',
-             'update_time:datetime',
-             'active:boolean',
+            'path',
+            'file_basename',
+            'file_extension',
+            'mime_type',
+            'aspect_ratio',
+            'created_time:datetime',
+            'updated_time:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Image */
+/* @var $model \common\modules\image\models\Image */
 
 $this->title = 'Create Image';
 $this->params['breadcrumbs'][] = ['label' => 'Images', 'url' => ['index']];

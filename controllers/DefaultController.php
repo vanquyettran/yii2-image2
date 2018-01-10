@@ -5,6 +5,7 @@ namespace common\modules\image\controllers;
 use common\modules\image\models\Image;
 use common\modules\image\models\ImageSearch;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\helpers\VarDumper;
 use yii\web\NotFoundHttpException;

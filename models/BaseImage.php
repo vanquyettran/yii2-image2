@@ -26,12 +26,9 @@ use yii\helpers\Html;
  * @property string $file_basename
  * @property string $file_extension
  * @property string $resize_labels
- * @property string $encode_data
  * @property string $mime_type
- * @property integer $active
- * @property integer $status
- * @property integer $create_time
- * @property integer $update_time
+ * @property integer $created_time
+ * @property integer $updated_time
  * @property integer $quality
  * @property string $aspect_ratio
  * @property integer $width
@@ -153,7 +150,7 @@ class BaseImage extends MyActiveRecord
 
     public function generatePath()
     {
-        $time = $this->create_time ? $this->create_time : time();
+        $time = $this->created_time ? $this->created_time : time();
         $this->path = date('Ym/', $time);
         if ($this->file_basename) {
             $this->path .= "$this->file_basename/";
@@ -324,8 +321,8 @@ class BaseImage extends MyActiveRecord
             ],
             [
                 'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'create_time',
-                'updatedAtAttribute' => 'update_time',
+                'createdAtAttribute' => 'created_time',
+                'updatedAtAttribute' => 'updated_time',
                 'value' => time(),
             ],
         ];
@@ -345,22 +342,17 @@ class BaseImage extends MyActiveRecord
     public function rules()
     {
         return [
-            [[
-                /*'creator_id', 'updater_id',*/
-                'active', 'status',
-                /*'create_time', 'update_time'*/
-                'width', 'height'
-            ], 'integer'],
+            [['width', 'height'], 'integer'],
+            [['name', 'path', 'file_basename'], 'trim'],
+            [['name', 'file_basename'], 'required'],
             [['name', 'path', 'file_basename'], 'string', 'max' => 255],
             [['file_extension', 'mime_type', 'aspect_ratio'], 'string', 'max' => 32],
-            [['resize_labels', 'encode_data'], 'string', 'max' => 2047],
+            [['resize_labels'], 'string', 'max' => 2047],
             [['file_basename'], 'unique'],
-            [['file_extension'], 'in', 'range' => Image::getValidImageExtensions()],
-            [['mime_type'], 'in', 'range' => Image::getValidImageMimeTypes()],
-//            [['creator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['creator_id' => 'id']],
-//            [['updater_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updater_id' => 'id']],
-            [['quality'], 'integer', 'min' => 1, 'max' => 100],
-            [['quality'], 'default', 'value' => 100],
+            ['file_extension', 'in', 'range' => Image::getValidImageExtensions()],
+            ['mime_type', 'in', 'range' => Image::getValidImageMimeTypes()],
+            ['quality', 'integer', 'min' => 1, 'max' => 100],
+            ['quality', 'default', 'value' => 100],
         ];
     }
 
@@ -378,12 +370,9 @@ class BaseImage extends MyActiveRecord
             'file_basename' => 'File Basename',
             'file_extension' => 'File Extension',
             'resize_labels' => 'Resize Labels',
-            'encode_data' => 'Encode Data',
             'mime_type' => 'Mime Type',
-            'active' => 'Active',
-            'status' => 'Status',
-            'create_time' => 'Create Time',
-            'update_time' => 'Update Time',
+            'created_time' => 'Created Time',
+            'updated_time' => 'Updated Time',
             'quality' => 'Quality',
             'aspect_ratio' => 'Aspect Ratio',
             'width' => 'Width',

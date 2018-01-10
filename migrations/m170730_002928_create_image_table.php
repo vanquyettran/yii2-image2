@@ -32,15 +32,11 @@ class m170730_002928_create_image_table extends Migration
             'aspect_ratio' => $this->string(32)->notNull(),
             'width' => $this->integer()->notNull(),
             'height' => $this->integer()->notNull(),
-            'description' => $this->string(511),
-            'resize_labels' => $this->string(2047),
-            'encode_data' => $this->string(2047),
-            'active' => $this->smallInteger(1),
-            'status' => $this->smallInteger(),
-            'create_time' => $this->integer(),
-            'update_time' => $this->integer(),
+            'resize_labels' => $this->string(2047)->notNull(),
+            'created_time' => $this->integer()->notNull(),
+            'updated_time' => $this->integer()->notNull(),
             'creator_id' => $this->integer()->notNull(),
-            'updater_id' => $this->integer(),
+            'updater_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
         // creates index for column `creator_id`

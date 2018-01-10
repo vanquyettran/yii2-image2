@@ -3,7 +3,6 @@
 use yii\web\View;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2;
 use common\modules\image\models\Image;
 use yii\helpers\Url;
 
@@ -16,8 +15,7 @@ $module = \common\modules\image\Module::getInstance();
  */
 
 if ($model->isNewRecord) {
-    $model->active = true;
-    $model->quality = 60;
+    $model->quality = 80;
 }
 $model->image_name_to_basename = true;
 ?>
@@ -99,8 +97,6 @@ $model->image_name_to_basename = true;
 
     </div>
 
-    <?= $form->field($model, 'active')->checkbox() ?>
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
@@ -114,6 +110,8 @@ $model->image_name_to_basename = true;
     var img_source = document.getElementById("<?= Html::getInputId($model, 'image_source') ?>");
     var img_source_loaded = false;
     var last_img_src = img_preview.querySelector("img") ? img_preview.querySelector("img").src : "";
+    var img_name = document.getElementById("<?= Html::getInputId($model, 'name') ?>");
+    var img_file_basename = document.getElementById("<?= Html::getInputId($model, 'file_basename') ?>");
     img_preview.empty = function () {
         while(img_preview.firstChild) {
             img_preview.removeChild(img_preview.firstChild);
@@ -124,7 +122,6 @@ $model->image_name_to_basename = true;
         if (img_source.value) {
             image.src = img_source.value;
 
-
             var msg = document.createElement("span");
             msg.className = "text-info";
             msg.innerHTML = "Loading...";
@@ -133,6 +130,7 @@ $model->image_name_to_basename = true;
                 img_preview.empty();
                 img_preview.appendChild(image);
                 img_source_loaded = true;
+                img_name.value = img_file_basename.value = image.src.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '');
             });
             image.addEventListener("error", function (event) {
                 img_preview.empty();
@@ -172,6 +170,7 @@ $model->image_name_to_basename = true;
             img_preview.empty();
             img_preview.appendChild(image);
             last_img_src = image.src;
+            img_name.value = img_file_basename.value = file.name.replace(/\.[^/.]+$/, '');
         });
     });
 </script>
