@@ -27,8 +27,8 @@ use yii\helpers\Html;
  * @property string $file_extension
  * @property string $resize_labels
  * @property string $mime_type
- * @property integer $created_time
- * @property integer $updated_time
+ * @property string $created_time
+ * @property string $updated_time
  * @property integer $quality
  * @property string $aspect_ratio
  * @property integer $width
@@ -150,12 +150,12 @@ class BaseImage extends MyActiveRecord
 
     public function generatePath()
     {
-        $time = $this->created_time ? $this->created_time : time();
-        $this->path = date('Ym/', $time);
+        $time = $this->created_time ? new \DateTime($this->created_time) : new \DateTime();
+        $this->path = $time->format('Ym/');
         if ($this->file_basename) {
             $this->path .= "$this->file_basename/";
         } else {
-            $this->path .= date('d/', $time);
+            $this->path .= $time->format('d/');
         }
         $dir = Yii::getAlias("@images/$this->path");
         if (!file_exists($dir)) {
@@ -323,7 +323,7 @@ class BaseImage extends MyActiveRecord
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'created_time',
                 'updatedAtAttribute' => 'updated_time',
-                'value' => time(),
+                'value' => (new \DateTime())->format('Y-m-d H:i:s'),
             ],
         ];
     }
