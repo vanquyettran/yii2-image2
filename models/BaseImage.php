@@ -48,7 +48,7 @@ class BaseImage extends MyActiveRecord
 
     public static function getMaxImageSize()
     {
-        return 2 * 1024 * 1024;
+        return 1024 * 1024;
     }
 
     public static function getValidImageExtensions()
